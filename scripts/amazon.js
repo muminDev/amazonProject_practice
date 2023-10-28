@@ -1,6 +1,7 @@
 import {cart} from '../data/carts.js';
 import {products} from '../data/products.js';
 
+//code generates html
 let productsHtml = '';
 products.forEach((product) => {
     productsHtml = productsHtml + `
@@ -60,44 +61,50 @@ let timeoutId = null;
 const productGrid = document.querySelector('.products-grid');
 productGrid.innerHTML = productsHtml;
 
-const cartQuantity = document.querySelectorAll('.cart-quantity');
-document.querySelectorAll('.js-add-to-cart')
-  .forEach((button) => {
-    button.addEventListener('click', () => {
-      const productId = button.dataset.productId;
-      
-      let matchingItem;
-      cart.forEach((item) => {
-        if (productId === item.productId) {
-          matchingItem = item;
-        }
+//this function sends selected item to the cart Page
+function addToCart(productId) {
+  const quantitySelector = document.querySelector(`.js-quantity-selector-${productId}`);
+  const selectorValue = Number(quantitySelector.value);
+  let matchingItem;
+  cart.forEach((item) => {
+    if (productId === item.productId) {
+      matchingItem = item;
+    }
+  });
+  
+  if (matchingItem) {
+    matchingItem.quantity += selectorValue;
+  } else {
+    cart.push({
+      productId: productId,
+      quantity: selectorValue
       });
-      
-      const quantitySelector = document.querySelector(`.js-quantity-selector-${productId}`);
-      const selectorValue = Number(quantitySelector.value);
+  }
+};
 
-      if (matchingItem) {
-        matchingItem.quantity += selectorValue;
-      } else {
-        cart.push({
-          productId: productId,
-          quantity: selectorValue
-          });
-      }
-      
-      let cartQuantityOverAll = 0;
+//this function updates cartQauntity on th homePage
+function cartQuanFirstPage() {
+  let cartQuantityOverAll = 0;
       cart.forEach((item) => {
         cartQuantityOverAll += item.quantity
       });
 
       document.querySelector('.cart-quantity')
         .innerHTML = cartQuantityOverAll;
-      console.log(cartQuantityOverAll);
-      console.log(cart);
+
+};
+
+//these codes handles buttons and added text over the button
+document.querySelectorAll('.js-add-to-cart')
+  .forEach((button) => {
+    button.addEventListener('click', () => {
+      const productId = button.dataset.productId;
+      addToCart(productId);
+      cartQuanFirstPage();
+
       if (timeoutId) {
         clearTimeout(timeoutId);
       }
-  
       const addedText = document.getElementById(`addedText${productId}`);
         addedText.style.opacity = 1;
       
