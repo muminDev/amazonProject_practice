@@ -1,3 +1,4 @@
+import {cart} from '../data/carts.js';
 
 let productsHtml = '';
 products.forEach((product) => {
@@ -41,7 +42,7 @@ products.forEach((product) => {
   
     <div class="product-spacer"></div>
   
-    <div class="added-to-cart">
+    <div class="added-to-cart" id="addedText${product.id}">
       <img src="images/icons/checkmark.png">
       Added
     </div>
@@ -52,6 +53,8 @@ products.forEach((product) => {
     </button>
   </div> `
 });
+
+let timeoutId = null;
 
 const productGrid = document.querySelector('.products-grid');
 productGrid.innerHTML = productsHtml;
@@ -90,5 +93,15 @@ document.querySelectorAll('.js-add-to-cart')
         .innerHTML = cartQuantityOverAll;
       console.log(cartQuantityOverAll);
       console.log(cart);
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+  
+      const addedText = document.getElementById(`addedText${productId}`);
+        addedText.style.opacity = 1;
+      
+      timeoutId = setTimeout(() => {
+        addedText.style.opacity = 0;
+      }, 2000);
     });
   });
