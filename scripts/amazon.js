@@ -62,7 +62,7 @@ let timeoutId = null;
 const productGrid = document.querySelector('.products-grid');
 productGrid.innerHTML = productsHtml;
 
-//this function updates cartQauntity on th homePage
+//this function updates cartQauntity on the homePage
 function updateCartQuantity() {
   let cartQuantityOverAll = 0;
       cart.forEach((item) => {
@@ -71,7 +71,6 @@ function updateCartQuantity() {
 
       document.querySelector('.cart-quantity')
         .innerHTML = cartQuantityOverAll;
-
 };
 
 //these codes handles buttons and added text over the button
