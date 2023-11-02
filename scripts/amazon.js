@@ -64,14 +64,15 @@ productGrid.innerHTML = productsHtml;
 
 //this function updates cartQauntity on the homePage
 function updateCartQuantity() {
-  let cartQuantityOverAll = 0;
-      cart.forEach((item) => {
-        cartQuantityOverAll += item.quantity
-      });
+  let cartQuantityOverAll = '';
+    cart.forEach((item) => {
+      cartQuantityOverAll += item.quantity;
+    });
 
-      document.querySelector('.cart-quantity')
-        .innerHTML = cartQuantityOverAll;
+    document.querySelector('.cart-quantity')
+      .innerHTML = cartQuantityOverAll;
 };
+updateCartQuantity();
 
 //these codes handles buttons and added text over the button
 document.querySelectorAll('.js-add-to-cart')
