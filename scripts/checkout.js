@@ -17,10 +17,16 @@ cart.forEach((cartItem) => {
     }
   });
   
+  const today = dayjs();
+
+    const dateString = today.format(
+      'dddd, MMMM D'
+    );
+
   cartSummaryHTML += `
   <div class="cart-item-container js-cart-container-${matchingProduct.id}">
             <div class="delivery-date">
-              Delivery date: Tuesday, June 21
+              Delivery date: ${dateString}
             </div>
 
             <div class="cart-item-details-grid">
