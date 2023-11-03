@@ -11,3 +11,5 @@ export const deliveryOptions = [{
   deliveryDays: 1,
   priceCent: 999
 }];
+
+console.log(deliveryOptions);
